@@ -1,6 +1,6 @@
 import { Stack, TextField } from '@mui/material'
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { v4 as uuidv4 } from "uuid"
 function Data() {
 
 	const [data, setdata] = useState({
@@ -10,12 +10,12 @@ function Data() {
 		likes: [],
 		language: [
 			{
-				id: Math.random(),
+				id: uuidv4(),
 				lName: "",
 				rating: null
 			},
 			{
-				id: Math.random(),
+				id: uuidv4(),
 				lName: "",
 				rating: null
 			}
@@ -23,9 +23,24 @@ function Data() {
 
 	})
 
+	const [user, setUser] = useState(JSON.parse(localStorage.getItem("list")) ? JSON.parse(localStorage.getItem("list")) : [])
+
 	const handleSubmit = () => {
+
+		setUser([...user, data])
+
 		console.log(data);
+
+		console.log("user", user);
+		// localStorage.setItem("list", JSON.stringify(user))
+
 	}
+	console.log("user", user);
+
+	useEffect(() => {
+		localStorage.setItem("list", JSON.stringify(user))
+	})
+
 
 	const handleLikes = (value) => {
 
@@ -33,16 +48,13 @@ function Data() {
 	}
 
 	const handleLanguage = (e, index) => {
-		// console.log(index);
-		// console.log(e.target.value);
 		console.log(e.target.name);
+		console.log(e.target.value);
 		let arr = [...data.language]
-		console.log(arr);
-
-		console.log(e.target.name);
+		// console.log(arr);
 		arr[index] = { ...arr[index], [e.target.name]: e.target.value }
 
-		// console.log(arr);
+		console.log(arr);
 
 		setdata({ ...data, language: arr })
 	}
@@ -52,7 +64,7 @@ function Data() {
 			...data,
 			language: [...data.language,
 			{
-				id: Math.random(),
+				id: uuidv4(),
 				lName: "",
 				rating: null
 			}
