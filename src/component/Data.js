@@ -57,6 +57,7 @@ function Data() {
 		console.log(arr);
 
 		setdata({ ...data, language: arr })
+
 	}
 
 	const addLanguage = () => {
@@ -70,22 +71,19 @@ function Data() {
 			}
 			]
 		})
-
 	}
 
 	const removeLanguage = (index) => {
 		setdata({ ...data, language: data.language.filter((dat, ind) => index !== ind) })
 		console.log(data);
-
 	}
-
-
 
 	return (
 		<div>
 			<Stack direction="column" spacing={2} sx={{ alignItems: "center" }}>
 
 				<TextField id="outlined-basic" label="firstname" variant="outlined" sx={{ width: "200px" }} onChange={(e) => setdata({ ...data, firstname: e.target.value })} />
+		
 				<TextField id="outlined-basic" label="lastname" variant="outlined" sx={{ width: "200px" }} onChange={(e) => setdata({ ...data, lastname: e.target.value })} />
 
 
@@ -110,9 +108,6 @@ function Data() {
 					/>
 					<label >Other</label>
 				</div>
-
-
-
 
 				<h5>Likes</h5>
 
